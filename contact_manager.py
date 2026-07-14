@@ -1,9 +1,10 @@
 import json
 
+# Configuration and shared state
 FILENAME = "contacts.json"
-
 contacts = []
 
+# Load contacts from the JSON file into memory
 def load_contacts():
     global contacts
     try:
@@ -13,10 +14,12 @@ def load_contacts():
         contacts = []
 
 
+# Save the in-memory contact list back to the JSON file
 def save_contacts():
     with open(FILENAME, "w") as f:
         json.dump(contacts, f, indent=2)
 
+# Add a new contact using user input
 def add_contact():
     name = input("Name: ")
     email = input("Email: ")
@@ -34,6 +37,7 @@ def add_contact():
     save_contacts()
     print(f"\n{name} added!")
 
+# Display all saved contacts in a readable format
 def view_contacts():
     if len(contacts) == 0:
         print("No contacts yet.")
@@ -45,6 +49,7 @@ def view_contacts():
         print(f"   Phone: {contact['phone']}")
         print(f"   Notes: {contact['notes']}")
 
+# Search contacts by name and print matching results
 def search_contacts():
     term = input("Search by name: ").lower()
 
@@ -63,6 +68,7 @@ def search_contacts():
         print(f"   Phone: {contact['phone']}")
         print(f"   Notes: {contact['notes']}")
 
+# Remove a contact by selecting its displayed number
 def delete_contact():
     if len(contacts) == 0:
         print("No contacts yet.")
@@ -81,6 +87,7 @@ def delete_contact():
     save_contacts()
     print(f"{name} deleted.")
 
+# Main application loop that presents the menu and routes user actions
 def main():
     load_contacts()
     while True:
